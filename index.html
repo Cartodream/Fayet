@@ -102,36 +102,15 @@
 
 
 			var mapbox = new L.TileLayer('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-				attribution: 'Cartographie : <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Données : <a target="_blank" href="http://www.cotedor-tourisme.com/">Côte-d\'Or Tourisme</a> - <a target="_blank" href="http://www.cotedor.fr/cms">CD21</a> - <a target="_blank" href="http://www.haute-marne.fr/">CD52</a> - <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'});
-			//map.addLayer(mapbox);
+				attribution: 'Cartographie : <a href="https://cartodream.wixsite.com/website-1">Cartodream</a> , <a href="https://www.openstreetmap.fr/">OSM</a>'});
+			map.addLayer(mapbox);
 			
 			var photos_aériennes = new L.TileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-				attribution: 'Cartographie : <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Données : <a target="_blank" href="http://www.cotedor-tourisme.com/">Côte-d\'Or Tourisme</a> - <a target="_blank" href="http://www.cotedor.fr/cms">CD21</a> - <a target="_blank" href="http://www.haute-marne.fr/">CD52</a> - <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'});
-			//map.addLayer(photos_aériennes);	
+				attribution: 'Cartographie : <a href="https://cartodream.wixsite.com/website-1">Cartodream</a> , <a href="https://www.openstreetmap.fr/">OSM</a>Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
+			// map.addLayer(photos_aériennes);	
 			
 	
-			//DONNEES IGN
-		
-			
-			var orthoIGN = new L.tileLayer ('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-				attribution: 'Cartographie : <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Données : <a target="_blank" href="http://www.cotedor-tourisme.com/">Côte-d\'Or Tourisme</a> - <a target="_blank" href="http://www.cotedor.fr/cms">CD21</a> - <a target="_blank" href="http://www.haute-marne.fr/">CD52</a> - <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'});
-			
-					
-			
-			
-		var PlanIGNV2 = new L.tileLayer ('http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-				attribution: 'Cartographie : <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Données : <a target="_blank" href="http://www.cotedor-tourisme.com/">Côte-d\'Or Tourisme</a> - <a target="_blank" href="http://www.cotedor.fr/cms">CD21</a> - <a target="_blank" href="http://www.haute-marne.fr/">CD52</a> - <a target="_blank" href="http://www.forets-champagne-bourgogne.fr/">Parc national de forêts</a> | Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery &copy; <a href="http://mapbox.com">Mapbox</a>'});
-			
-			
-			map.addLayer(PlanIGNV2);								
+											
 			
 			//FIN TESTS
 			
