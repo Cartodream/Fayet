@@ -56,8 +56,10 @@
 		<script type="text/javascript" src="donnees/Coeur.js"></script>
 		<script type="text/javascript" src="donnees/communes.js"></script>
 		<script type="text/javascript" src="donnees/POI.js"></script>
+		<script type="text/javascript" src="donnees/circuits_vtt.js"></script>
 		
-	
+		<script type="text/javascript" src="donnees/sentiers_PDIPR.js"></script>
+		
 		<script>
 		var map;
 		var markers = L.markerClusterGroup(); // initialisation de la variable pour les clusters
@@ -185,7 +187,101 @@
 						clickable: false
 				}
 			}).addTo(map);
-
+// debut Circuits VTT ----------------------------------------
+				// contenu popup Circuits VTT
+				function onEachFeature3(feature, layer) {
+				var popupContent = "";
+				if (feature.properties && feature.properties.nom) {
+					popupContent += '<h6><b>'+feature.properties.nom+'</b></h6>';
+					if (feature.properties && feature.properties.longueur) {
+						popupContent += '<b>Longueur :</b> '+feature.properties.longueur+'<br>';
+					}
+					if (feature.properties && feature.properties.denivele) {
+						popupContent += '<b>Denivelé :</b> '+feature.properties.denivele+' m<br>';
+					}
+					if (feature.properties && feature.properties.difficulte) {
+						popupContent += '<b>Niveau VTT FFC :</b> '+feature.properties.difficulte+'<br>';
+					}
+					if (feature.properties && feature.properties.trace_gps) {
+						popupContent += '<b>Trace GPS :</b> <a target="_blank" href='+feature.properties.trace_gps+'> fichier GPX à télécharger </a><br>';
+					}
+					if (feature.properties && feature.properties.site_web) {
+						popupContent += '<b>Plus d\'infos :</b> <a target="_blank" href='+feature.properties.site_web+'> Parcours et détail circuit VTT </a><br>';
+					}
+					
+					if (feature.properties && feature.properties.source) {
+						popupContent += '<b>Source des données :</b> '+feature.properties.source+'<br>';
+					}
+				}
+				layer.bindPopup(popupContent);
+			}
+			
+				// Crée un style ( une couleur différente pour chacun) pour les circuits VTT
+				// Set up styles for subway lines
+			function VTTStyle(feature) {
+				return {
+					"color": feature.properties.couleur,
+					"weight": 2,
+					"opacity": 1,
+					"fillOpacity": 0,
+					"clickable": true
+				};
+			}          
+							
+				//ajout circuits VTT
+			var circuits_vtt = L.geoJson(vtt,{
+				style: VTTStyle, 
+				onEachFeature: onEachFeature3
+			});
+			routeLayers["circuits_vtt"] = circuits_vtt;
+			
+			//  fin circuits vtt  -----------------------------------------------
+// debut sentiers PDIPR ----------------------------------------
+				// contenu popup sentiers PDIPR
+			function onEachFeature2(feature, layer) {
+				var popupContent = "";
+				if (feature.properties && feature.properties.nom) {
+					popupContent += '<h6><b>'+feature.properties.nom+'</b></h6>';
+					if (feature.properties && feature.properties.longueur) {
+						popupContent += '<b>Longueur :</b> '+feature.properties.longueur+'<br>';
+					}
+					if (feature.properties && feature.properties.denivele) {
+						popupContent += '<b>Denivelé :</b> '+feature.properties.denivele+' m<br>';
+					}
+					if (feature.properties && feature.properties.trace_gps) {
+						popupContent += '<b>Trace GPS :</b> <a target="_blank" href='+feature.properties.trace_gps+'> fichier GPX à télécharger </a><br>';
+					}
+					if (feature.properties && feature.properties.site_web) {
+						popupContent += '<b>Plus d\'infos :</b> <a target="_blank" href='+feature.properties.site_web+'> Carte et détails de la randonnée </a><br>';
+					}
+					
+					if (feature.properties && feature.properties.source) {
+						popupContent += '<b>Source des données :</b> '+feature.properties.source+'<br>';
+					}
+				}
+				layer.bindPopup(popupContent);
+			}
+			
+				// Crée un style ( une couleur différente pour chacun) pour les sentiers
+				// Set up styles for subway lines
+			function sentierStyle(feature) {
+				return {
+					"color": feature.properties.couleur,
+					"weight": 2,
+					"opacity": 1,
+					"fillOpacity": 0,
+					"clickable": true
+				};
+			}          
+							
+				//ajout sentiers PDIPR
+			var sentiers_pdipr = L.geoJson(sentiersPDIPR,{
+				style: sentierStyle, 
+				onEachFeature: onEachFeature2
+			});
+			routeLayers["sentiers_pdipr"] = sentiers_pdipr;
+			
+			//  fin sentiers PDIPR  -----------------------------------------------
 //****************************************FUZZY SEARCH**************************************************************
 			
 			// https://github.com/naomap/leaflet-fusesearch/blob/master/src/leaflet.fusesearch.js
@@ -454,6 +550,8 @@
 			}
 
 			var selectListElt = $('#select-list');	// on récupère dans une variable l'élément correspondant à l'identifiant 'select-list' (attribué au menu de gauche)
+			selectListElt.html(selectListElt.html() + '<li><input id="circuits_vtt" type="checkbox" onclick="displayRouteLayer(\'circuits_vtt\')"><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #0000FF"></span></span> Petit Tour de Fayet</li>');
+			selectListElt.html(selectListElt.html() + '<li><input id="sentiers_pdipr" type="checkbox" onclick="displayRouteLayer(\'sentiers_pdipr\')"><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #FF9100"></span></span> Grand Tour de Fayet</li>');
 			
 			// ajout de toutes les catégories au menu de gauche
 			for (i in tabCategories){ // pour toutes les catégories de tabCategories
